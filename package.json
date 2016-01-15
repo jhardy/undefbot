@@ -1,0 +1,14 @@
+{
+  "name": "undefbot",
+  "version": "0.1.0",
+  "description": "undef bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Jared Hardy",
+  "license": "ISC",
+  "dependencies": {
+    "botkit": "0.0.5"
+  }
+}
