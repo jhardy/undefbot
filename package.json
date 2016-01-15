@@ -9,6 +9,7 @@
   "author": "Jared Hardy",
   "license": "ISC",
   "dependencies": {
-    "botkit": "0.0.5"
+    "botkit": "0.0.5",
+    "request": "^2.67.0"
   }
 }

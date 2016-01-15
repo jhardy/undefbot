@@ -54,7 +54,7 @@ This bot demonstrates many of the core features of Botkit:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 var Botkit = require('botkit');
-
+var request = require('request');
 
 if (!process.env.token) {
   console.log('Error: Specify token in environment');
@@ -158,7 +158,16 @@ controller.hears([':rebeccablack:'],'direct_message,direct_mention', function(bo
 
   }
 
-  console.log(message)
   bot.reply(message,replyString);
 
+});
+
+controller.hears([':chucknorris:'], 'direct_message,direct_mention', function(bot, message){
+
+  request({url: "http://api.icndb.com/jokes/random", json: true}, function(err, res, json) {
+  if (err) {
+    throw err;
+  }
+    bot.reply(message,json.value.joke);
+  });
 });
