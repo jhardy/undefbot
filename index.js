@@ -59,6 +59,10 @@ var Promise = require("promise");
 var langugeLookup = require('./lib/language-lookup');
 var weatherIconLookup = require('./lib/weatherbot');
 
+if(!process.env.token) {
+  var env = require('./env.js')
+}
+
 
 
 if (!process.env.token) {
@@ -139,6 +143,10 @@ controller.hears(['attach'],'direct_message,direct_mention',function(bot,message
 controller.hears(['dm me'],'direct_message,direct_mention',function(bot,message) {
   bot.startConversation(message,function(err,convo) {
     convo.say('Heard ya');
+    convo.say(message, {
+      response_type: "ephemeral",
+      text: "This is hidden"
+    })
   });
 
   bot.startPrivateConversation(message,function(err,dm) {
@@ -368,7 +376,7 @@ controller.hears(['translate (.*)'], 'direct_message,direct_mention,mention', fu
 
 controller.hears(['weather (.*)'], 'direct_message,direct_mention,mention', function(bot, message){
 
-  var apiKey = "&appid=84eda3b0306b5445812e2946ddbacc41";
+  var apiKey = "&appid=" + process.env.WEATHER_KEY;
   var units = "&units=imperial"
   var baseURL = 'http://api.openweathermap.org/data/2.5/weather';
 
